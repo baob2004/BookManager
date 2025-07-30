@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BookstoreAPI.Models;
+using BookstoreAPI.Models.Entitites;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -16,12 +17,38 @@ namespace BookstoreAPI.Data
 
         }
 
-        // DbSet<Book> Books { get; set; }
-        // DbSet<Category> Categories { get; set; }
+        DbSet<Book> Books { get; set; }
+        DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<Category>().HasData
+            (
+                new Category
+                {
+                    Id = 1,
+                    Name = "Fiction",
+                    Description = "Fictional literature and novels",
+                    CreatedAt = new DateTime(2025, 7, 30, 21, 24, 0)
+                },
+                new Category
+                {
+                    Id = 2,
+                    Name = "Non-Fiction",
+                    Description = "Books based on real events and facts",
+                    CreatedAt = new DateTime(2025, 7, 30, 21, 24, 0)
+                },
+                new Category
+                {
+                    Id = 3,
+                    Name = "Science",
+                    Description = "Books about scientific topics",
+                    CreatedAt = new DateTime(2025, 7, 30, 21, 24, 0)
+                }
+            );
+
 
             List<IdentityRole> roles = new List<IdentityRole>()
                         {

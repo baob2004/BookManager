@@ -19,6 +19,6 @@ namespace BookstoreAPI.Models.Entitites
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public int CategoryId { get; set; }
         // Navigation Property
-        public Category Category { get; set; }
+        public required Category Category { get; set; }
     }
 }
