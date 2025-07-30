@@ -1,13 +1,25 @@
-bin/ obj/ *.csproj.user *.suo *.log *.pdb *.cache
-
+bin/
+obj/
+*.csproj.user
+*.suo
+*.log
+*.pdb
+*.cache
 .vscode/
+appsettings.Development.json
+appsettings.json
+*.env
+.DS_Store
+Thumbs.db
+wwwroot/lib/
+node_modules/
+*.nupkg
+packages/
+.idea/
+*.sln.iml
 
-appsettings.Development.json appsettings.json *.env
 
-.DS_Store Thumbs.db
-
-wwwroot/lib/ node_modules/
-
-*.nupkg packages/
-
-.idea/ *.sln.iml
+**/appsettings.json
+**/appsettings.Development.json
+**/obj/
+**/bin/
