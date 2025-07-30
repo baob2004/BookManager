@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
-namespace BookstoreAPI.Dtos.Account
+namespace BookstoreAPI.Models.Dtos.Account
 {
     public class RegisterDto
     {

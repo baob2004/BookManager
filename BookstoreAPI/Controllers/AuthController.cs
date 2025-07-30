@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Azure.Identity;
-using BookstoreAPI.Dtos.Account;
 using BookstoreAPI.Models;
+using BookstoreAPI.Models.Dtos.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +21,34 @@ namespace BookstoreAPI.Controllers
         {
             _userManager = userManager;
             _signInManager = signInManager;
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginDto loginDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == loginDto.Username);
+            if (user == null)
+            {
+                return BadRequest("Username not found");
+            }
+
+            var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
+            if (!result.Succeeded) return Unauthorized("Username not found and/or password is incorrect");
+
+            return Ok(
+                new NewUserDto
+                {
+                    Username = user.UserName,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Address = user.Address,
+                    Phone = user.Phone
+                }
+            );
         }
 
         [HttpPost("register")]
@@ -74,34 +102,6 @@ namespace BookstoreAPI.Controllers
             {
                 return StatusCode(500, ex);
             }
-        }
-
-        [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDto loginDto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == loginDto.Username);
-            if (user == null)
-            {
-                return BadRequest("Username not found");
-            }
-
-            var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
-            if (!result.Succeeded) return Unauthorized("Username not found and/or password is incorrect");
-
-            return Ok(
-                new NewUserDto
-                {
-                    Username = user.UserName,
-                    Email = user.Email,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Address = user.Address,
-                    Phone = user.Phone
-                }
-            );
         }
     }
 }
