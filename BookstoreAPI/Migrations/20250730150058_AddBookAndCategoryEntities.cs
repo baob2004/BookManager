@@ -185,6 +185,7 @@ namespace BookstoreAPI.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ISBN = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Stock = table.Column<int>(type: "int", nullable: false),
@@ -221,6 +222,19 @@ namespace BookstoreAPI.Migrations
                     { 1, new DateTime(2025, 7, 30, 21, 24, 0, 0, DateTimeKind.Unspecified), "Fictional literature and novels", "Fiction" },
                     { 2, new DateTime(2025, 7, 30, 21, 24, 0, 0, DateTimeKind.Unspecified), "Books based on real events and facts", "Non-Fiction" },
                     { 3, new DateTime(2025, 7, 30, 21, 24, 0, 0, DateTimeKind.Unspecified), "Books about scientific topics", "Science" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Books",
+                columns: new[] { "Id", "Author", "CategoryId", "CreatedAt", "ISBN", "ImageUrl", "Price", "PublishDate", "Stock", "Title" },
+                values: new object[,]
+                {
+                    { 1, "George Orwell", 1, new DateTime(2025, 7, 30, 21, 58, 0, 0, DateTimeKind.Unspecified), "978-0451524935", "https://example.com/images/1984.jpg", 15.99m, new DateTime(1949, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 50, "1984" },
+                    { 2, "Harper Lee", 1, new DateTime(2025, 7, 30, 21, 58, 0, 0, DateTimeKind.Unspecified), "978-0446310789", "https://example.com/images/tokillamockingbird.jpg", 12.50m, new DateTime(1960, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 30, "To Kill a Mockingbird" },
+                    { 3, "Yuval Noah Harari", 2, new DateTime(2025, 7, 30, 21, 58, 0, 0, DateTimeKind.Unspecified), "978-0062316097", "https://example.com/images/sapiens.jpg", 20.00m, new DateTime(2014, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), 25, "Sapiens: A Brief History of Humankind" },
+                    { 4, "Stephen Hawking", 3, new DateTime(2025, 7, 30, 21, 58, 0, 0, DateTimeKind.Unspecified), "978-0553380163", "https://example.com/images/briefhistory.jpg", 18.75m, new DateTime(1988, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 20, "A Brief History of Time" },
+                    { 5, "Jane Austen", 1, new DateTime(2025, 7, 30, 21, 58, 0, 0, DateTimeKind.Unspecified), "978-0141439518", "https://example.com/images/prideandprejudice.jpg", 10.99m, new DateTime(1813, 1, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 40, "Pride and Prejudice" },
+                    { 6, "Richard Dawkins", 3, new DateTime(2025, 7, 30, 21, 58, 0, 0, DateTimeKind.Unspecified), "978-0199291151", "https://example.com/images/selfishgene.jpg", 14.95m, new DateTime(1976, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 15, "The Selfish Gene" }
                 });
 
             migrationBuilder.CreateIndex(

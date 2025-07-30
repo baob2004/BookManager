@@ -112,6 +112,10 @@ namespace BookstoreAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -142,6 +146,86 @@ namespace BookstoreAPI.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Books");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Author = "George Orwell",
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2025, 7, 30, 21, 58, 0, 0, DateTimeKind.Unspecified),
+                            ISBN = "978-0451524935",
+                            ImageUrl = "https://example.com/images/1984.jpg",
+                            Price = 15.99m,
+                            PublishDate = new DateTime(1949, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Stock = 50,
+                            Title = "1984"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Author = "Harper Lee",
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2025, 7, 30, 21, 58, 0, 0, DateTimeKind.Unspecified),
+                            ISBN = "978-0446310789",
+                            ImageUrl = "https://example.com/images/tokillamockingbird.jpg",
+                            Price = 12.50m,
+                            PublishDate = new DateTime(1960, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Stock = 30,
+                            Title = "To Kill a Mockingbird"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Author = "Yuval Noah Harari",
+                            CategoryId = 2,
+                            CreatedAt = new DateTime(2025, 7, 30, 21, 58, 0, 0, DateTimeKind.Unspecified),
+                            ISBN = "978-0062316097",
+                            ImageUrl = "https://example.com/images/sapiens.jpg",
+                            Price = 20.00m,
+                            PublishDate = new DateTime(2014, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Stock = 25,
+                            Title = "Sapiens: A Brief History of Humankind"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Author = "Stephen Hawking",
+                            CategoryId = 3,
+                            CreatedAt = new DateTime(2025, 7, 30, 21, 58, 0, 0, DateTimeKind.Unspecified),
+                            ISBN = "978-0553380163",
+                            ImageUrl = "https://example.com/images/briefhistory.jpg",
+                            Price = 18.75m,
+                            PublishDate = new DateTime(1988, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Stock = 20,
+                            Title = "A Brief History of Time"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Author = "Jane Austen",
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2025, 7, 30, 21, 58, 0, 0, DateTimeKind.Unspecified),
+                            ISBN = "978-0141439518",
+                            ImageUrl = "https://example.com/images/prideandprejudice.jpg",
+                            Price = 10.99m,
+                            PublishDate = new DateTime(1813, 1, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Stock = 40,
+                            Title = "Pride and Prejudice"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Author = "Richard Dawkins",
+                            CategoryId = 3,
+                            CreatedAt = new DateTime(2025, 7, 30, 21, 58, 0, 0, DateTimeKind.Unspecified),
+                            ISBN = "978-0199291151",
+                            ImageUrl = "https://example.com/images/selfishgene.jpg",
+                            Price = 14.95m,
+                            PublishDate = new DateTime(1976, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Stock = 15,
+                            Title = "The Selfish Gene"
+                        });
                 });
 
             modelBuilder.Entity("BookstoreAPI.Models.Entitites.Category", b =>
