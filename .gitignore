@@ -1,0 +1,13 @@
+bin/ obj/ *.csproj.user *.suo *.log *.pdb *.cache
+
+.vscode/
+
+appsettings.Development.json appsettings.json *.env
+
+.DS_Store Thumbs.db
+
+wwwroot/lib/ node_modules/
+
+*.nupkg packages/
+
+.idea/ *.sln.iml
