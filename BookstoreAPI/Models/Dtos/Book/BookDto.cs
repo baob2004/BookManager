@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using BookstoreAPI.Models.Entitites;
 
-namespace BookstoreAPI.Models.Entitites
+namespace BookstoreAPI.Models.Dtos.Book
 {
-    public class Book
+    public class BookDto
     {
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;
@@ -19,7 +21,6 @@ namespace BookstoreAPI.Models.Entitites
         public DateTime? PublishDate { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public int CategoryId { get; set; }
-        // Navigation Property
-        public Category Category { get; set; }
+        public string CategoryName { get; set; } = string.Empty;
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookstoreAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250730091438_InitCreate")]
-    partial class InitCreate
+    [Migration("20250730150058_AddBookAndCategoryEntities")]
+    partial class AddBookAndCategoryEntities
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -105,6 +105,176 @@ namespace BookstoreAPI.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("BookstoreAPI.Models.Entitites.Book", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ISBN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<DateTime?>("PublishDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Books");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Author = "George Orwell",
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2025, 7, 30, 21, 58, 0, 0, DateTimeKind.Unspecified),
+                            ISBN = "978-0451524935",
+                            ImageUrl = "https://example.com/images/1984.jpg",
+                            Price = 15.99m,
+                            PublishDate = new DateTime(1949, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Stock = 50,
+                            Title = "1984"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Author = "Harper Lee",
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2025, 7, 30, 21, 58, 0, 0, DateTimeKind.Unspecified),
+                            ISBN = "978-0446310789",
+                            ImageUrl = "https://example.com/images/tokillamockingbird.jpg",
+                            Price = 12.50m,
+                            PublishDate = new DateTime(1960, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Stock = 30,
+                            Title = "To Kill a Mockingbird"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Author = "Yuval Noah Harari",
+                            CategoryId = 2,
+                            CreatedAt = new DateTime(2025, 7, 30, 21, 58, 0, 0, DateTimeKind.Unspecified),
+                            ISBN = "978-0062316097",
+                            ImageUrl = "https://example.com/images/sapiens.jpg",
+                            Price = 20.00m,
+                            PublishDate = new DateTime(2014, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Stock = 25,
+                            Title = "Sapiens: A Brief History of Humankind"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Author = "Stephen Hawking",
+                            CategoryId = 3,
+                            CreatedAt = new DateTime(2025, 7, 30, 21, 58, 0, 0, DateTimeKind.Unspecified),
+                            ISBN = "978-0553380163",
+                            ImageUrl = "https://example.com/images/briefhistory.jpg",
+                            Price = 18.75m,
+                            PublishDate = new DateTime(1988, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Stock = 20,
+                            Title = "A Brief History of Time"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Author = "Jane Austen",
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2025, 7, 30, 21, 58, 0, 0, DateTimeKind.Unspecified),
+                            ISBN = "978-0141439518",
+                            ImageUrl = "https://example.com/images/prideandprejudice.jpg",
+                            Price = 10.99m,
+                            PublishDate = new DateTime(1813, 1, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Stock = 40,
+                            Title = "Pride and Prejudice"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Author = "Richard Dawkins",
+                            CategoryId = 3,
+                            CreatedAt = new DateTime(2025, 7, 30, 21, 58, 0, 0, DateTimeKind.Unspecified),
+                            ISBN = "978-0199291151",
+                            ImageUrl = "https://example.com/images/selfishgene.jpg",
+                            Price = 14.95m,
+                            PublishDate = new DateTime(1976, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Stock = 15,
+                            Title = "The Selfish Gene"
+                        });
+                });
+
+            modelBuilder.Entity("BookstoreAPI.Models.Entitites.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2025, 7, 30, 21, 24, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Fictional literature and novels",
+                            Name = "Fiction"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 7, 30, 21, 24, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Books based on real events and facts",
+                            Name = "Non-Fiction"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2025, 7, 30, 21, 24, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Books about scientific topics",
+                            Name = "Science"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -256,6 +426,17 @@ namespace BookstoreAPI.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("BookstoreAPI.Models.Entitites.Book", b =>
+                {
+                    b.HasOne("BookstoreAPI.Models.Entitites.Category", "Category")
+                        .WithMany("Books")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -305,6 +486,11 @@ namespace BookstoreAPI.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BookstoreAPI.Models.Entitites.Category", b =>
+                {
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }
