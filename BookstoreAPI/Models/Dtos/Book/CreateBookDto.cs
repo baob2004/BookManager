@@ -20,11 +20,9 @@ namespace BookstoreAPI.Models.Dtos.Book
         [Range(0.001, 10000, ErrorMessage = "Price can only be between 0.001 and 10000")]
         public Decimal Price { get; set; }
         [Required]
-        [Range(0, int.MaxValue, ErrorMessage = "Price cannot be below 0")]
+        [Range(0, int.MaxValue, ErrorMessage = "Stock cannot be below 0")]
         public int Stock { get; set; } = 0;
-        public string? ImageUrl { get; set; }
-        public DateTime? PublishDate { get; set; }
-        [Required]
-        public int CategoryId { get; set; }
+        public string? ImageUrl { get; set; } = null;
+        public DateTime? PublishDate { get; set; } = null;
     }
 }

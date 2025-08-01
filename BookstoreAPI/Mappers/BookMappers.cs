@@ -9,21 +9,52 @@ namespace BookstoreAPI.Mappers
 {
     public static class BookMappers
     {
-        public static BookDto ToBookDto(this Book bookModel)
+        public static BookDto ToBookDto(this Book book)
         {
             return new BookDto
             {
-                Id = bookModel.Id,
-                Title = bookModel.Title,
-                Author = bookModel.Author,
-                ISBN = bookModel.ISBN,
-                Price = bookModel.Price,
-                Stock = bookModel.Stock,
-                ImageUrl = bookModel.ImageUrl,
-                PublishDate = bookModel.PublishDate,
-                CreatedAt = bookModel.CreatedAt,
-                CategoryId = bookModel.CategoryId,
-                CategoryName = bookModel.Category.Name
+                Id = book.Id,
+                Title = book.Title,
+                Author = book.Author,
+                ISBN = book.ISBN,
+                Price = book.Price,
+                Stock = book.Stock,
+                ImageUrl = book.ImageUrl,
+                PublishDate = book.PublishDate,
+                CreatedAt = book.CreatedAt,
+                CategoryId = book.CategoryId,
+                CategoryName = book.Category.Name
+            };
+        }
+
+        public static Book ToBookFromCreate(this CreateBookDto book, int CategoryId)
+        {
+            return new Book
+            {
+                Title = book.Title,
+                Author = book.Author,
+                ISBN = book.ISBN,
+                Price = book.Price,
+                Stock = book.Stock,
+                ImageUrl = book.ImageUrl,
+                PublishDate = book.PublishDate,
+                CategoryId = CategoryId,
+            };
+        }
+
+        public static Book ToBookFromUpdate(this UpdateBookDto book, int id)
+        {
+            return new Book
+            {
+                Id = id,
+                Title = book.Title,
+                Author = book.Author,
+                ISBN = book.ISBN,
+                Price = book.Price,
+                Stock = book.Stock,
+                ImageUrl = book.ImageUrl,
+                PublishDate = book.PublishDate,
+                CategoryId = book.CategoryId
             };
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using BookstoreAPI.Models.Entitites;
 
 namespace BookstoreAPI.Models.Dtos.Book
 {
@@ -14,7 +15,7 @@ namespace BookstoreAPI.Models.Dtos.Book
         [Required]
         [MaxLength(100, ErrorMessage = "Author cannot be over 100 characters")]
         public string Author { get; set; } = string.Empty;
-        [MaxLength(13, ErrorMessage = "ISBN cannot be over 100 characters")]
+        [MaxLength(13, ErrorMessage = "ISBN cannot be over 13 characters")]
         public string? ISBN { get; set; }
         [Required]
         [Range(0.001, 10000, ErrorMessage = "Price can only be between 0.001 and 10000")]
@@ -24,7 +25,6 @@ namespace BookstoreAPI.Models.Dtos.Book
         public int Stock { get; set; } = 0;
         public string? ImageUrl { get; set; }
         public DateTime? PublishDate { get; set; }
-        [Required]
         public int CategoryId { get; set; }
     }
 }
